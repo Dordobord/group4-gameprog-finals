@@ -13,15 +13,17 @@ public class TopDownController : MonoBehaviour
     public List<Sprite> eSprites;
     public List<Sprite> seSprites;
     public List<Sprite> sSprites;
+    public static Vector2 BulletDir;
 
     [SerializeField] public float walkSpeed;
     [SerializeField] public float frameRate;
-
+    
     float idleTime;
     Vector2 direction;
 
     void Start()
     {
+        BulletDir = Vector2.down;
     }
 
     void Update()
@@ -34,7 +36,7 @@ public class TopDownController : MonoBehaviour
 
         //Flipping Character Animation
         Flip();
-
+        BulletDir = GetBulletDirection(BulletDir).normalized;
         SetSprite();
     }
 
@@ -87,6 +89,34 @@ public class TopDownController : MonoBehaviour
         }
 
         return selectedSprites;
+    }
+
+    Vector2 GetBulletDirection(Vector2 direct)
+    {
+        Vector2 Dir = direct;
+        if (direction.y > 0)
+        {
+            if (Mathf.Abs(direction.x) > 0)
+                Dir = new Vector2(1, 1);
+            else
+                Dir = new Vector2(0, 1);
+        }
+        if (direction.y < 0)
+        {
+            if (Mathf.Abs(direction.x) > 0)
+                Dir = new Vector2(1, -1);
+            else
+                Dir = new Vector2(0, -1);
+        }
+        else if (direction.y == 0)
+        {
+            if (Mathf.Abs(direction.x) > 0)
+                Dir = new Vector2(1, 0);
+        }
+        if (rd.flipX == true && direction.x != 0)
+            Dir.x *= -1;
+
+        return Dir;
     }
 
 }
