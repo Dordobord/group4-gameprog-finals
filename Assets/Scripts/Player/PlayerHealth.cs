@@ -5,19 +5,21 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     
-    public int maxHealth = 100;
-    public int currentHealth;
+    public static int maxHealth;
+    public static int currentHealth;
     public Healthbar healthBar;
 
     void Start()
     {
+        maxHealth = 100;
         currentHealth = maxHealth;
         healthBar.setMaxHealth(maxHealth);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) // HealthBar Tester
+        currentHealth = Mathf.Clamp(currentHealth, 0, 100);
+        if (Input.GetKeyDown(KeyCode.P)) // HealthBar Tester
         {
             TakeDamage(20);
         }

@@ -5,27 +5,51 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PowerUp : MonoBehaviour
 {
-    [SerializeField] private PowerUPScriptable buffEffect;
-    public List<PowerUPScriptable> PowerUPs = new List<PowerUPScriptable>();
+    [SerializeField] private PowerUpScript buffEffect;
+    public List<PowerUpScript> PowerUPs = new List<PowerUpScript>();
     private SpriteRenderer rend;
-    private int speed = 2;
 
     private void Start()
     {
-        int randomvalue = System.Convert.ToInt32(Random.value * 10);
-        buffEffect = PowerUPs[randomvalue % PowerUPs.Count];
+
+        float dropRoll = UnityEngine.Random.Range(0f, 1f);
+        float cumulativeDropChance = 0f;
+        Shuffle(PowerUPs);
+        foreach (PowerUpScript buff in PowerUPs)
+        {
+            cumulativeDropChance += buff.DropChance;
+
+            if (dropRoll <= cumulativeDropChance)
+            {
+                buffEffect = buff;
+            }
+        }
+
         rend = GetComponent<SpriteRenderer>();
         rend.sprite = buffEffect.Sprite;
     }
 
     private void Update()
     {
-        transform.Translate(Vector2.down * speed * Time.deltaTime);
+        transform.position = Vector2.Lerp(transform.position, new Vector2(Random.value, Random.value), Time.deltaTime / 2);
         if (transform.position.y < Boundary.UPboundary.y * -1)
         {
             Destroy(this.gameObject);
         }
     }
- 
 
+    void Shuffle(List<PowerUpScript> PuPs)
+    {
+        PowerUpScript buff;
+        int n = PuPs.Count;
+
+        while (n > 1)
+        {
+            n--;
+            int k = Random.Range(0, n);
+            buff = PuPs[n];
+            PuPs[n] = PuPs[k];
+            PuPs[k] = buff;
+        }
+    }
 }

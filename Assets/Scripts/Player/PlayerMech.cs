@@ -12,88 +12,95 @@ public class PlayerMech : MonoBehaviour
 {
     [SerializeField] public GameObject Bullet;
     [SerializeField] public Transform BulletSpawnSpot;
-    public static float Health, Mana, MaxHP, MaxMP;
-    float dashDist = 8, dashTime = 2, timer;
+    Rigidbody2D rb;
+
+    PlayerHealth PlayerHealth;
+    PlayerMana PlayerMana;
+
+    float dashPower = 15, dashTime = 2;
     public float shootCD = 2;
-    public bool canShoot;
-    public Text collectedText;
-    public static int collectionAmount;
+    public bool canShoot, canDash;
     IEnumerator Coroutine;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         canShoot = true;
-        Health = 100; MaxHP= 100;
-        Mana = 100; MaxMP = 100;
+        canDash= true;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        timer += Time.deltaTime;
-    //Player HP Updates
-        Health = PlayerPrefs.GetFloat("PlayerHP");
-        Health = Mathf.Clamp(Health, 0, 100);
-        PlayerPrefs.SetFloat("PlayerHP", Health);
-        PlayerPrefs.Save();
-    //Clamping HP and MP
-        Health = Mathf.Clamp(Health, 0,100);
-        Mana = Mathf.Clamp(Health, 0, 100);
-        //Start Shooting Coroutine
-        if(Input.GetButtonDown("Fire1"))
+        //Shooting
+        if (canShoot)
         {
-            Coroutine = Shoot(shootCD);
-            StartCoroutine(Coroutine);
-        }    
-        //Dashing
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Mana = 100;
-            if (Mana >= 20)
-                Dash();
-            else if (Mana<20)
-                Debug.Log("Insufficient Mana");
+            // Check if the fire button is pressed
+            if (Input.GetButtonDown("Fire1"))
+            {
+                    Coroutine = Shoot(shootCD);
+                    StartCoroutine(Coroutine);
+            }
         }
+        else
+            Debug.Log("In Cooldown.");
+
+        //Dashing
+        if (canDash)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                    Coroutine = Dash(dashTime);
+                    StartCoroutine(Coroutine);
+            }
+        }
+        else
+            Debug.Log("In Cooldown.");
     }
     private void FixedUpdate()
     {
-        Mana += 1;
+        PlayerMana.currentMana += 1;
     }
     IEnumerator Shoot(float CD)
     {
-        if (canShoot == true)
+        if (PlayerMana.currentMana >= 20)
         {
             canShoot = false;
-            Debug.Log("Shoot is Pressed. Time is " + Time.deltaTime);
             Instantiate(Bullet, BulletSpawnSpot.position, Quaternion.identity);
+            yield return new WaitForSeconds(CD);
+            canShoot = true;
         }
-        else
-            Debug.Log("Shoot is in cooldown.");
-        yield return new WaitForSeconds(CD);
-        canShoot = true;
+        else if (PlayerMana.currentMana < 20)
+            Debug.Log("Insufficient Mana");
     }
 
-    void Dash()
+    IEnumerator Dash(float CD)
     {
-        GetComponent<PolygonCollider2D>().enabled = false;
-        Mana -= 20;
-        Vector2 CurrentPos = transform.position;
-        Vector2 FinalPos = CurrentPos + new Vector2(TopDownController.BulletDir.x * dashDist, TopDownController.BulletDir.y * dashDist);
-        transform.position = FinalPos;
-        Mana -= 20;
-        GetComponent<PolygonCollider2D>().enabled = true;
+        if (PlayerMana.currentMana >= 20)
+        {
+            canDash = false;
+            GetComponent<PolygonCollider2D>().enabled = false;
+            PlayerMana.currentMana -= 20;
+            rb.velocity = TopDownController.BulletDir * dashPower;
+            PlayerMana.currentMana -= 20;
+            GetComponent<PolygonCollider2D>().enabled = true;
+            yield return new WaitForSeconds(CD);
+            canDash = true;
+        }
+        else if (PlayerMana.currentMana < 20)
+            Debug.Log("Insufficient Mana");
     }
 
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
-        Health -= damage;
-        Debug.Log("Player Hit! HP = " + Health);
-        PlayerPrefs.SetFloat("PlayerHP", Health);
+        PlayerHealth.currentHealth -= damage;
+        Debug.Log("Player Hit! HP = " + PlayerHealth.currentHealth);
+        PlayerPrefs.SetFloat("PlayerHP", PlayerHealth.currentHealth);
         PlayerPrefs.Save();
 
-        if (Health == 0)
+        if (PlayerHealth.currentHealth == 0)
             Die();
     }
     void Die()
@@ -101,5 +108,10 @@ public class PlayerMech : MonoBehaviour
         Debug.Log("You have Died. T^T");
         GetComponent<ScoreManager>().FinalScore();
         SceneManager.LoadScene(0);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
     }
 }
