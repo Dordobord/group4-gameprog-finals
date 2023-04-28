@@ -17,6 +17,8 @@ public class PlayerBullet : MonoBehaviour
         Vector2 dir = TopDownController.BulletDir;
         score = PlayerPrefs.GetInt("PlayerScore");
         rb.velocity = dir * speed;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 
     }
 

@@ -25,7 +25,19 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void TakeDamage(int damage)
+    public void Heal(int hpPlus)
+    {
+        currentHealth += hpPlus;
+        healthBar.setHealth(currentHealth);
+    }
+
+    public void AddMaxHP(int hpMaxAdd)
+    {
+        maxHealth += hpMaxAdd;
+        healthBar.setMaxHealth(maxHealth);
+    }
+
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
 

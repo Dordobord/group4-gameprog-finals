@@ -14,9 +14,15 @@ public class PlayerMech : MonoBehaviour
     [SerializeField] public Transform BulletSpawnSpot;
     public static float Health, Mana, MaxHP, MaxMP;
     float dashDist = 8, dashTime = 2, timer;
+    public float shootCD = 2;
+    public bool canShoot;
+    public Text collectedText;
+    public static int collectionAmount;
+    IEnumerator Coroutine;
 
     void Start()
     {
+        canShoot = true;
         Health = 100; MaxHP= 100;
         Mana = 100; MaxMP = 100;
     }
@@ -24,6 +30,7 @@ public class PlayerMech : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         timer += Time.deltaTime;
     //Player HP Updates
         Health = PlayerPrefs.GetFloat("PlayerHP");
@@ -33,14 +40,19 @@ public class PlayerMech : MonoBehaviour
     //Clamping HP and MP
         Health = Mathf.Clamp(Health, 0,100);
         Mana = Mathf.Clamp(Health, 0, 100);
-    //Shooting
-        Shoot();
-    //Dashing
+        //Start Shooting Coroutine
+        if(Input.GetButtonDown("Fire1"))
+        {
+            Coroutine = Shoot(shootCD);
+            StartCoroutine(Coroutine);
+        }    
+        //Dashing
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            Mana = 100;
             if (Mana >= 20)
                 Dash();
-            else
+            else if (Mana<20)
                 Debug.Log("Insufficient Mana");
         }
     }
@@ -48,10 +60,18 @@ public class PlayerMech : MonoBehaviour
     {
         Mana += 1;
     }
-    void Shoot()
+    IEnumerator Shoot(float CD)
     {
-        if (Input.GetButtonDown("Fire1"))
-        Instantiate(Bullet, BulletSpawnSpot.position, Quaternion.identity);
+        if (canShoot == true)
+        {
+            canShoot = false;
+            Debug.Log("Shoot is Pressed. Time is " + Time.deltaTime);
+            Instantiate(Bullet, BulletSpawnSpot.position, Quaternion.identity);
+        }
+        else
+            Debug.Log("Shoot is in cooldown.");
+        yield return new WaitForSeconds(CD);
+        canShoot = true;
     }
 
     void Dash()
