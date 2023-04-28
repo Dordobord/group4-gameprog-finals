@@ -7,7 +7,6 @@ public class PlayerHealth : MonoBehaviour
     
     public int maxHealth = 100;
     public int currentHealth;
-
     public Healthbar healthBar;
 
     void Start()
@@ -16,13 +15,13 @@ public class PlayerHealth : MonoBehaviour
         healthBar.setMaxHealth(maxHealth);
     }
 
-    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) // HealthBar Tester
         {
             TakeDamage(20);
         }
+
     }
 
     public void Heal(int hpPlus)
@@ -40,7 +39,6 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
         healthBar.setHealth(currentHealth);
     }
 }
