@@ -17,7 +17,7 @@ public class PlayerMech : MonoBehaviour
     PlayerHealth PlayerHealth;
     PlayerMana PlayerMana;
 
-    float dashPower = 15, dashTime = 2;
+    float dashPower = 60, dashTime = 2;
     public float shootCD = 2;
     public bool canShoot, canDash;
     IEnumerator Coroutine;

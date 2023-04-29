@@ -13,6 +13,7 @@ public class EnemyMechanics : MonoBehaviour
     private bool chooseDir = false;
     private Vector3 randomDir;
     public int n;
+    //SpriteRenderer rend;
 
     // Start is called before the first frame update
     public enum EnemyState
@@ -27,6 +28,7 @@ public class EnemyMechanics : MonoBehaviour
         Enemy = EnemyList[n];
         Enemy.TargetPlayer();
         HP = Enemy.Health;
+    //    rend.sprite = Enemy.sprite;
     }
 
     // Update is called once per frame
@@ -83,7 +85,7 @@ public class EnemyMechanics : MonoBehaviour
         HP -= damage;
         Debug.Log("Enemy Hit! HP = " + HP);
 
-        if (HP == 0)
+        if (HP <= 0)
             return Die();
 
         else return 0;
