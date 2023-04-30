@@ -11,7 +11,8 @@ public class EnemyScript : ScriptableObject
     public float speed;
     public int Health;
     public int AtkDmg;
-    public float Range;
+    public float AtkRange;
+    public float Range = 10;
 
     public void TargetPlayer()
     {

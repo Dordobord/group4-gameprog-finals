@@ -5,6 +5,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class EnemyMechanics : MonoBehaviour
 {
+    public string EnemyName; 
     public float HP;
     public GameObject loot;
     private int score;
@@ -13,7 +14,8 @@ public class EnemyMechanics : MonoBehaviour
     private bool chooseDir = false;
     private Vector3 randomDir;
     public int n;
-    //SpriteRenderer rend;
+    public SpriteRenderer rend;
+   
 
     // Start is called before the first frame update
     public enum EnemyState
@@ -24,11 +26,13 @@ public class EnemyMechanics : MonoBehaviour
     public EnemyState currState;
     void Start()
     {
-        n = Random.Range(0,EnemyList.Count-1);
+        
+        n = Random.Range(0,EnemyList.Count);
         Enemy = EnemyList[n];
+        EnemyName = Enemy.name;
         Enemy.TargetPlayer();
         HP = Enemy.Health;
-    //    rend.sprite = Enemy.sprite;
+        rend.sprite = Enemy.sprite;
     }
 
     // Update is called once per frame
@@ -81,7 +85,6 @@ public class EnemyMechanics : MonoBehaviour
     }
     public int TakeDamage(float damage)
     {
-        int score;
         HP -= damage;
         Debug.Log("Enemy Hit! HP = " + HP);
 

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Key
   m_EditorClassIdentifier: 
   Sprite: {fileID: 0}
-  DropChance: 0
-  LootName: 
+  DropChance: 1
+  LootName: Key
   amount: 0
