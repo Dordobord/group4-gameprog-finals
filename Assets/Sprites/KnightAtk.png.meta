@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e93917f44f8b7e243bf54d24381ea072
+guid: dfd793fb6741b2e4094541c392493612
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -101,21 +101,114 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: KnightAtk_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 34
+        width: 197
+        height: 146
+      alignment: 9
+      pivot: {x: 0.58851266, y: 0.37235907}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c5d1663bc84520408ce105e515483df
+      internalID: 1353516825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnightAtk_1
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 35
+        width: 187
+        height: 143
+      alignment: 9
+      pivot: {x: 0.5979543, y: 0.36516407}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3df136725744cbe41ab4fdad4cdb1ad7
+      internalID: -37995013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnightAtk_2
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 32
+        width: 236
+        height: 162
+      alignment: 9
+      pivot: {x: 0.47140476, y: 0.30956498}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bab88b27bd0c94346abbb9b0a8e38512
+      internalID: 1484480336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnightAtk_4
+      rect:
+        serializedVersion: 2
+        x: 885
+        y: 36
+        width: 268
+        height: 153
+      alignment: 9
+      pivot: {x: 0.45683196, y: 0.32356766}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02ba94471732ef84480df3285fe415e7
+      internalID: -738893136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnightAtk_5
+      rect:
+        serializedVersion: 2
+        x: 1148
+        y: 0
+        width: 6
+        height: 197
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d589f4c4020e3c64db3fe462de2035a6
+      internalID: -1198132747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,7 +219,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      KnightAtk_0: 1353516825
+      KnightAtk_1: -37995013
+      KnightAtk_2: 1484480336
+      KnightAtk_3: -534648815
+      KnightAtk_4: -738893136
+      KnightAtk_5: -1198132747
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

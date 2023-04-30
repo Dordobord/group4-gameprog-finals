@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 60c45c2f9e4371e40b49405e6cfdbd24
+guid: b18bd080a34645846a2b6b32399a0b83
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -101,101 +101,68 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Spr_K_Hero_Atk_0
+      name: Spearmen_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 18
-        width: 47
-        height: 40
+        x: 70
+        y: 28
+        width: 104
+        height: 137
       alignment: 9
-      pivot: {x: 0.49689606, y: 0.47082156}
+      pivot: {x: 0.6014074, y: 0.37490627}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d5bfd93243d3ae4bad58c42c36f46ac
-      internalID: -208490575
+      spriteID: d9739b42e411d6d40bda06caf7471855
+      internalID: -989666752
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spr_K_Hero_Atk_1
+      name: Spearmen_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 18
-        width: 49
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 345
+        y: 28
+        width: 110
+        height: 137
+      alignment: 9
+      pivot: {x: 0.57789946, y: 0.37490645}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86126dbf347a72d4d8759c423e4c9f71
-      internalID: -2100198791
+      spriteID: 8c6347b480654c240a42a32b5febfc43
+      internalID: 35405301
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spr_K_Hero_Atk_2
+      name: Spearmen_2
       rect:
         serializedVersion: 2
-        x: 113
-        y: 18
-        width: 57
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 620
+        y: 28
+        width: 110
+        height: 137
+      alignment: 9
+      pivot: {x: 0.57190716, y: 0.33641592}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df8b5e8516b72164399a0a59bbed5687
-      internalID: -1214955788
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spr_K_Hero_Atk_3
-      rect:
-        serializedVersion: 2
-        x: 171
-        y: 18
-        width: 62
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cf643cf05d53fba46a5b151770ce8ad8
-      internalID: -688804992
+      spriteID: 5d5aab1885f9ef145987519f9c1ab8e4
+      internalID: 1799972905
       vertices: []
       indices: 
       edges: []
@@ -211,10 +178,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Spr_K_Hero_Atk_0: -208490575
-      Spr_K_Hero_Atk_1: -2100198791
-      Spr_K_Hero_Atk_2: -1214955788
-      Spr_K_Hero_Atk_3: -688804992
+      Spearmen_0: -989666752
+      Spearmen_1: 35405301
+      Spearmen_2: 1799972905
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

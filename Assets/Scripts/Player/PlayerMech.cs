@@ -15,8 +15,8 @@ public class PlayerMech : MonoBehaviour
     Rigidbody2D rb;
 
     PlayerHealth PlayerHealth;
-    float dashPower = 100, dashTime = 2, dashCost = 20;
-    float shootCD = 1f, shootCost = 5;
+    float dashPower = 60, dashTime = 2, dashCost = 20;
+    float shootCD = 0.5f, shootCost = 5;
     public bool canShoot, canDash;
     IEnumerator Coroutine;
     public GameObject Bar;

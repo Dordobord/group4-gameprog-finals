@@ -15,18 +15,22 @@ public class EnemyMechanics : MonoBehaviour
     private Vector3 randomDir;
     public int n;
     public SpriteRenderer rend;
+    Collider2D swordRange;
    
 
     // Start is called before the first frame update
     public enum EnemyState
     {
         Wander,
-        Follow
+        Follow,
+        Attack
     };
     public EnemyState currState;
     void Start()
     {
-        
+        rend = GetComponent<SpriteRenderer>();
+        swordRange = GetComponentInChildren<Collider2D>();
+        swordRange.enabled = false;
         n = Random.Range(0,EnemyList.Count);
         Enemy = EnemyList[n];
         EnemyName = Enemy.name;
@@ -46,11 +50,16 @@ public class EnemyMechanics : MonoBehaviour
             case (EnemyState.Follow):
                 Follow();
                 break;
+            case (EnemyState.Attack):
+                Attack();
+                break;
         }
         if (IsPlayerInRange(Enemy.Range))
             currState = EnemyState.Follow;
         else if (!IsPlayerInRange(Enemy.Range))
             currState = EnemyState.Wander;
+        else if (IsPlayerInRange(Enemy.AtkRange))
+            currState = EnemyState.Attack;
     }
     private bool IsPlayerInRange(float range)
     {
@@ -82,6 +91,18 @@ public class EnemyMechanics : MonoBehaviour
     void Follow()
     {
         transform.position = Vector2.MoveTowards(transform.position, Enemy.target.transform.position, Enemy.speed * Time.deltaTime);
+    }
+
+    void Attack()
+    {
+        if (Enemy.name == "KnightLvl1")
+        {
+            Debug.Log("Attack");
+        }
+        if (Enemy.name == "SpearmenLvl1")
+        {
+            Debug.Log("Shoot");
+        }
     }
     public int TakeDamage(float damage)
     {

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: df5e92f4796c19642abe4d685e13a684
+guid: ba55ac8a287030f41b83b62ba3782a20
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -101,80 +101,68 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Spr_K_Hero_Idle_0
+      name: KnightIdle_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 47
-        height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 8
+        y: 30
+        width: 192
+        height: 154
+      alignment: 9
+      pivot: {x: 0.5832159, y: 0.34230056}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e87d964780976c43a22439d9b5e6d1c
-      internalID: -1318119426
+      spriteID: b2f9d1350613ff2469435c6839ae4030
+      internalID: 896286338
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spr_K_Hero_Idle_1
+      name: KnightIdle_1
       rect:
         serializedVersion: 2
-        x: 47
-        y: 0
-        width: 50
-        height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 283
+        y: 30
+        width: 192
+        height: 149
+      alignment: 9
+      pivot: {x: 0.5832159, y: 0.31556237}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a13f8d8d52ae44c4490ddcd5580ec59a
-      internalID: 990483862
+      spriteID: 71d12e866760bf446a8a94557b4f58fb
+      internalID: -1788230492
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spr_K_Hero_Idle_2
+      name: KnightIdle_2
       rect:
         serializedVersion: 2
-        x: 97
-        y: 0
-        width: 53
-        height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 558
+        y: 30
+        width: 192
+        height: 149
+      alignment: 9
+      pivot: {x: 0.5832157, y: 0.32843012}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3907d0433fe936741af4d5e026bb4a26
-      internalID: 865238131
+      spriteID: 9d9ec52678c09db468f5872a66eba2f8
+      internalID: -142167414
       vertices: []
       indices: 
       edges: []
@@ -190,9 +178,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Spr_K_Hero_Idle_0: -1318119426
-      Spr_K_Hero_Idle_1: 990483862
-      Spr_K_Hero_Idle_2: 865238131
+      KnightIdle_0: 896286338
+      KnightIdle_1: -1788230492
+      KnightIdle_2: -142167414
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
