@@ -15,24 +15,24 @@ public class PlayerMech : MonoBehaviour
     Rigidbody2D rb;
 
     PlayerHealth PlayerHealth;
-    PlayerMana PlayerMana;
-
-    float dashPower = 60, dashTime = 2;
-    public float shootCD = 2;
+    float dashPower = 100, dashTime = 2, dashCost = 20;
+    float shootCD = 1f, shootCost = 5;
     public bool canShoot, canDash;
     IEnumerator Coroutine;
+    public GameObject Bar;
+    Manabar manabar;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         canShoot = true;
         canDash= true;
+        manabar = Bar.GetComponent<Manabar>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
         //Shooting
         if (canShoot)
         {
@@ -57,38 +57,42 @@ public class PlayerMech : MonoBehaviour
         }
         else
             Debug.Log("In Cooldown.");
+
+        if (Input.GetKeyDown(KeyCode.O)) // HealthBar Tester
+        {
+            manabar.SpendMana(20);
+        }
+        else if (Input.GetKeyDown(KeyCode.P))
+            manabar.RecoverMana(20);
     }
-    private void FixedUpdate()
-    {
-        PlayerMana.currentMana += 1;
-    }
+
     IEnumerator Shoot(float CD)
     {
-        if (PlayerMana.currentMana >= 20)
+        if (manabar.manaAmount >= shootCost)
         {
             canShoot = false;
+            manabar.SpendMana(shootCost);
             Instantiate(Bullet, BulletSpawnSpot.position, Quaternion.identity);
             yield return new WaitForSeconds(CD);
             canShoot = true;
         }
-        else if (PlayerMana.currentMana < 20)
+        else
             Debug.Log("Insufficient Mana");
     }
 
     IEnumerator Dash(float CD)
     {
-        if (PlayerMana.currentMana >= 20)
+        if (manabar.manaAmount >= dashCost)
         {
             canDash = false;
             GetComponent<PolygonCollider2D>().enabled = false;
-            PlayerMana.currentMana -= 20;
+            manabar.SpendMana(20);
             rb.velocity = TopDownController.BulletDir * dashPower;
-            PlayerMana.currentMana -= 20;
             GetComponent<PolygonCollider2D>().enabled = true;
             yield return new WaitForSeconds(CD);
             canDash = true;
         }
-        else if (PlayerMana.currentMana < 20)
+        else
             Debug.Log("Insufficient Mana");
     }
 
@@ -103,15 +107,12 @@ public class PlayerMech : MonoBehaviour
         if (PlayerHealth.currentHealth == 0)
             Die();
     }
+
     void Die()
     {
         Debug.Log("You have Died. T^T");
-        GetComponent<ScoreManager>().FinalScore();
-        SceneManager.LoadScene(0);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
+        Debug.Log("Level Restart.");
+        Scene CurrentLvl = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(CurrentLvl.name);
     }
 }

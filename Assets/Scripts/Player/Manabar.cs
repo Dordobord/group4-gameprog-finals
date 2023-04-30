@@ -3,53 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Manabar : MonoBehaviour{
-    private Mana mana;
-    private Image barImage;
+public class Manabar : MonoBehaviour
+{
+    public float MANA_MAX = 100;
+    public float manaAmount = 100;
+    private float manaRegenAmount = 5;
+    Image barImage;
+    public GameObject mbar;
 
-    private void Awake()
+    private void Start()
     {
-        barImage = transform.Find("Bar").GetComponent<Image>();
+        barImage = mbar.GetComponent<Image>();
 
-        mana = new Mana();
     }
-
     private void Update()
     {
-        mana.Update();
 
-        barImage.fillAmount = mana.GetManaNormalized();
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        barImage.fillAmount = GetManaNormalized();
+        manaAmount = Mathf.Clamp(manaAmount, 0, 100);
+        if (Input.GetKeyDown(KeyCode.Minus)) // HealthBar Tester
         {
-            mana.SpendMana(15);
+            SpendMana(20);
         }
-    }
- 
-}
-public class Mana{   
-    public const int MANA_MAX = 100;
-    private float manaAmount;
-    private float manaRegenAmount;
+        else if (Input.GetKeyDown(KeyCode.Equals))
+            RecoverMana(20);
 
-    public Mana(){
-        manaAmount = 0;
-        manaRegenAmount = 30f;
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
-        manaAmount += manaRegenAmount * Time.deltaTime;
+        manaAmount += manaRegenAmount * Time.fixedDeltaTime;
     }
-    public void SpendMana(int amount)
+
+    public void SpendMana(float amount)
     {
-        if (manaAmount >= amount){
-            manaAmount -= amount;
-        }
+        manaAmount -= amount;
+    }
+    public void RecoverMana(float amount)
+    {
+        manaAmount += amount;
     }
     public float GetManaNormalized()
     {
         return manaAmount / MANA_MAX;
     }
-
 }

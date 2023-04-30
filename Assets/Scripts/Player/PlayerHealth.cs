@@ -19,10 +19,12 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         currentHealth = Mathf.Clamp(currentHealth, 0, 100);
-        if (Input.GetKeyDown(KeyCode.P)) // HealthBar Tester
+        if (Input.GetKeyDown(KeyCode.Minus)) // HealthBar Tester
         {
             TakeDamage(20);
         }
+        else if (Input.GetKeyDown(KeyCode.Equals))
+            Heal(20);
 
     }
 

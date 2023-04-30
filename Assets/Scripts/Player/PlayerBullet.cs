@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerBullet : MonoBehaviour
 {
 
-    [SerializeField] public float speed = 10f;
+    [SerializeField] public float speed = 20f;
     public float damage = 20;
     public Rigidbody2D rb;
     private int score;

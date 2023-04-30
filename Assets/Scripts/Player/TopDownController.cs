@@ -23,6 +23,7 @@ public class TopDownController : MonoBehaviour
 
     void Start()
     {
+        walkSpeed = 5;
         BulletDir = Vector2.down;
     }
 

@@ -1004,9 +1004,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bullet: {fileID: 795293878184029910, guid: 71f74ae700cc13c4e91b2f1a41085bcb, type: 3}
   BulletSpawnSpot: {fileID: 1227608115}
-  shootCD: 2
   canShoot: 0
   canDash: 0
+  Bar: {fileID: 1776905325}
 --- !u!60 &760795554
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1014,7 +1014,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760795547}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1343,7 +1343,7 @@ GameObject:
   - component: {fileID: 1571306166}
   m_Layer: 5
   m_Name: Bar
-  m_TagString: Untagged
+  m_TagString: Bar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1455,9 +1455,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1776905325}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c71fe4b8d6b61fa4fa0ed079140c5eba, type: 3}
+  m_Script: {fileID: 11500000, guid: 4129a7c11ec021a4195e81b9b9ce3df8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MANA_MAX: 100
+  manaAmount: 100
+  mbar: {fileID: 1571306164}
 --- !u!1 &2081283062
 GameObject:
   m_ObjectHideFlags: 0
