@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 8034818325405215402}
   - component: {fileID: 8034818325405215403}
   - component: {fileID: 8034818325405215400}
+  - component: {fileID: -7569817143909277849}
   m_Layer: 5
   m_Name: Stats
   m_TagString: Untagged
@@ -230,6 +231,23 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &-7569817143909277849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8293611144790718982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c287d8657f931148822d6232b30834f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 7880194723883510615, guid: 5cb4d560b562ad641bd99f1e322f0359,
+    type: 3}
+  bulletPrefab: {fileID: 3165699437049367072, guid: 5cb4d560b562ad641bd99f1e322f0359,
+    type: 3}
+  bulletforce: 20
 --- !u!1 &8293611144918692847
 GameObject:
   m_ObjectHideFlags: 0
