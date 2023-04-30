@@ -7,12 +7,8 @@ public class TopDownController : MonoBehaviour
 {
     public Rigidbody2D body;
     public SpriteRenderer rd;
+    public Animator animator;
 
-    public List<Sprite> nSprites;
-    public List<Sprite> neSprites;
-    public List<Sprite> eSprites;
-    public List<Sprite> seSprites;
-    public List<Sprite> sSprites;
     public static Vector2 BulletDir;
 
     [SerializeField] public float walkSpeed;
@@ -31,27 +27,16 @@ public class TopDownController : MonoBehaviour
         //Get the Direction of Input
         direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
 
+        animator.SetBool("isMoving", true);
+
         //Set Walk Based on Direction
         body.velocity = direction * walkSpeed;
 
         //Flipping Character Animation
         Flip();
         BulletDir = GetBulletDirection(BulletDir).normalized;
-        SetSprite();
     }
 
-    void SetSprite()
-    {
-        List<Sprite> directionSprites = GetSpriteDirection();
-        if (directionSprites != null)
-        {
-            float playTime = Time.time - idleTime;
-            int frame = (int)((playTime * frameRate)) % directionSprites.Count;
-            rd.sprite = directionSprites[frame];
-        }
-        else
-            idleTime = Time.time;
-    }
 
     void Flip()
     {
@@ -65,31 +50,6 @@ public class TopDownController : MonoBehaviour
         }
     }
 
-    List<Sprite> GetSpriteDirection()
-    {
-        List<Sprite> selectedSprites = null;
-        if (direction.y > 0)
-        {
-            if (Mathf.Abs(direction.x) > 0)
-                selectedSprites = neSprites;
-            else
-                selectedSprites = nSprites;
-        }
-        if (direction.y < 0)
-        {
-            if (Mathf.Abs(direction.x) > 0)
-                selectedSprites = seSprites;
-            else
-                selectedSprites = sSprites;
-        }
-        else if (direction.y == 0)
-        {
-            if (Mathf.Abs(direction.x) > 0)
-                selectedSprites = eSprites;
-        }
-
-        return selectedSprites;
-    }
 
     Vector2 GetBulletDirection(Vector2 direct)
     {
