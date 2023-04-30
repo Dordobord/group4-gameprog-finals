@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7dad9b02e82fe243bcc6d05db78b208, type: 3}
   m_Name: HealthUp
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 1098040543, guid: 568bb6f389c190b479bfa8660d999535, type: 3}
+  Sprite: {fileID: 505014257, guid: 568bb6f389c190b479bfa8660d999535, type: 3}
   DropChance: 20
   LootName: Health Pot
   amount: 20
