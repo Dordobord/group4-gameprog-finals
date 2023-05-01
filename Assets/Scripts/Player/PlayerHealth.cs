@@ -24,19 +24,20 @@ public class PlayerHealth : MonoBehaviour
             TakeDamage(20);
         }
         else if (Input.GetKeyDown(KeyCode.Equals))
-            Heal(20);
+            Heal();
 
     }
 
-    public void Heal(int hpPlus)
+    public void Heal()
     {
-        currentHealth += hpPlus;
+        currentHealth += 20;
         healthBar.setHealth(currentHealth);
     }
 
-    public void AddMaxHP(int hpMaxAdd)
+    public void AddMaxHP()
     {
-        maxHealth += hpMaxAdd;
+        maxHealth += 50;
+        currentHealth += 50;
         healthBar.setMaxHealth(maxHealth);
     }
 

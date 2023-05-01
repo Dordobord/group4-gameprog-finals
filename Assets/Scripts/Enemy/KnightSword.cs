@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class KnightSword : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnTriggerEnter2D(Collider2D hit)
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (hit.gameObject.tag == "Player" || hit.gameObject.tag == "PlayerBullet")
+        {
+            if (hit.gameObject.tag == "Enemy")
+            {
+                Debug.Log("Attacked");
+            }
+            Destroy(gameObject);
+        }
     }
 }

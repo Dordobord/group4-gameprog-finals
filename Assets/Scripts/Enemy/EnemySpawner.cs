@@ -5,17 +5,17 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject Enemy;
-    Vector2 spawnArea, roomSize,roomSize2;
+    Vector2 spawnArea, roomSize,roomSize2, RoomMid;
     bool canSpawn;
     private void Start()
     {
-        Vector2 RoomMid = GetComponentInParent<Transform>().position;
+        RoomMid = GetComponentInParent<Transform>().position;
         canSpawn = true;
-        roomSize.x = RoomMid.x + this.GetComponent<BoxCollider2D>().size.x;
-        roomSize.y = RoomMid.y + this.GetComponent<BoxCollider2D>().size.y;
+        roomSize.x = RoomMid.x + this.GetComponent<BoxCollider2D>().size.x/2;
+        roomSize.y = RoomMid.y + this.GetComponent<BoxCollider2D>().size.y/2;
 
-        roomSize2.x = RoomMid.x - this.GetComponent<BoxCollider2D>().size.x;
-        roomSize2.y = RoomMid.y - this.GetComponent<BoxCollider2D>().size.y;
+        roomSize2.x = RoomMid.x - this.GetComponent<BoxCollider2D>().size.x/2;
+        roomSize2.y = RoomMid.y - this.GetComponent<BoxCollider2D>().size.y/2;
 
     }
 

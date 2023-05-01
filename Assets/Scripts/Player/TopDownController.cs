@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class TopDownController : MonoBehaviour
@@ -11,11 +12,11 @@ public class TopDownController : MonoBehaviour
 
     public static Vector2 BulletDir;
 
-    [SerializeField] public float walkSpeed;
+    public static float walkSpeed;
     [SerializeField] public float frameRate;
     
-    float idleTime;
-    Vector2 direction;
+    public Vector2 direction;
+    bool isRight = false;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class TopDownController : MonoBehaviour
 
     void Update()
     {
+
         //Get the Direction of Input
         direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
 
@@ -34,21 +36,24 @@ public class TopDownController : MonoBehaviour
         body.velocity = direction * walkSpeed;
 
         //Flipping Character Animation
-        Flip();
+        if (direction.x < 0 && Mathf.Floor(transform.rotation.y) != 0)
+        {
+            Flip();
+            isRight = false;
+        }
+        else if (direction.x > 0 && Mathf.Floor(transform.localRotation.y) == 0)
+        {
+            Flip();
+            isRight = true;
+        }
+
         BulletDir = GetBulletDirection(BulletDir).normalized;
     }
 
 
     void Flip()
     {
-        if (!rd.flipX && direction.x < 0)
-        {
-            rd.flipX = true;
-        }
-        else if (rd.flipX && direction.x > 0)
-        {
-            rd.flipX = false;
-        }
+        transform.Rotate(0, 180, 0);
     }
 
 
@@ -74,7 +79,7 @@ public class TopDownController : MonoBehaviour
             if (Mathf.Abs(direction.x) > 0)
                 Dir = new Vector2(1, 0);
         }
-        if (rd.flipX == true && direction.x != 0)
+        if (isRight == false && direction.x != 0)
             Dir.x *= -1;
 
         return Dir;

@@ -34,7 +34,11 @@ public class Manabar : MonoBehaviour
     {
         manaAmount += manaRegenAmount * Time.fixedDeltaTime;
     }
-
+    public void AddMaxMana()
+    {
+        MANA_MAX += 50;
+        manaAmount += 50;
+    }
     public void SpendMana(float amount)
     {
         manaAmount -= amount;

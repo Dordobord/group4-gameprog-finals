@@ -7,17 +7,16 @@ public class EnemyMechanics : MonoBehaviour
 {
     public string EnemyName; 
     public float HP;
+    public int damage;
     public GameObject loot;
     private int score;
     public List<EnemyScript> EnemyList;
     EnemyScript Enemy;
     private bool chooseDir = false;
     private Vector3 randomDir;
-    public int n;
+    int n;
     public SpriteRenderer rend;
-    Collider2D swordRange;
-   
-
+    Vector3 currPos;
     // Start is called before the first frame update
     public enum EnemyState
     {
@@ -29,19 +28,19 @@ public class EnemyMechanics : MonoBehaviour
     void Start()
     {
         rend = GetComponent<SpriteRenderer>();
-        swordRange = GetComponentInChildren<Collider2D>();
-        swordRange.enabled = false;
         n = Random.Range(0,EnemyList.Count);
         Enemy = EnemyList[n];
         EnemyName = Enemy.name;
         Enemy.TargetPlayer();
         HP = Enemy.Health;
         rend.sprite = Enemy.sprite;
+        damage = Enemy.AtkDmg;
     }
 
     // Update is called once per frame
     void Update()
     {
+        currPos = transform.position;
         switch (currState)
         {
             case (EnemyState.Wander):
@@ -58,7 +57,7 @@ public class EnemyMechanics : MonoBehaviour
             currState = EnemyState.Follow;
         else if (!IsPlayerInRange(Enemy.Range))
             currState = EnemyState.Wander;
-        else if (IsPlayerInRange(Enemy.AtkRange))
+        else if (IsPlayerInRange(Enemy.Range) && IsPlayerInRange(Enemy.AtkRange))
             currState = EnemyState.Attack;
     }
     private bool IsPlayerInRange(float range)
@@ -97,34 +96,34 @@ public class EnemyMechanics : MonoBehaviour
     {
         if (Enemy.name == "KnightLvl1")
         {
-            Debug.Log("Attack");
+            GetComponentInChildren<BoxCollider2D>().enabled = true;
         }
         if (Enemy.name == "SpearmenLvl1")
         {
             Debug.Log("Shoot");
         }
     }
-    public int TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         HP -= damage;
         Debug.Log("Enemy Hit! HP = " + HP);
 
         if (HP <= 0)
-            return Die();
+            Die();
 
-        else return 0;
     }
-    public int Die()
+    public float rand;
+    public void Die()
     {
         Debug.Log("Enemy Killed");
 
-        Destroy(this.gameObject);
-        float rand = Random.value;
-        if (rand <= 0.40)
+        rand = Random.value; Debug.Log("Drop Loot? " +rand);
+        if (rand < 0.40)
         {
-            Debug.Log("Drop Loot.");
-            Instantiate(loot, this.transform.position, Quaternion.identity);
+
+            Instantiate(loot, currPos, Quaternion.identity);
         }
-        return score;
+
+        Destroy(this.gameObject);
     }
 }

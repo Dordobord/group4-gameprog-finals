@@ -6,16 +6,14 @@ using UnityEngine.SceneManagement;
 public class PlayerBullet : MonoBehaviour
 {
 
-    [SerializeField] public float speed = 20f;
+    [SerializeField] public float speed = 60f;
     public float damage = 20;
     public Rigidbody2D rb;
-    private int score;
 
     // Start is called before the first frame update
     void Start()
     {
         Vector2 dir = TopDownController.BulletDir;
-        score = PlayerPrefs.GetInt("PlayerScore");
         rb.velocity = dir * speed;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
@@ -40,10 +38,7 @@ public class PlayerBullet : MonoBehaviour
             {
                 EnemyMechanics enemy = hit.gameObject.GetComponent<EnemyMechanics>();
 
-                score += enemy.TakeDamage(damage);
-                PlayerPrefs.SetInt("PlayerScore", score);
-                PlayerPrefs.Save();
-
+                enemy.TakeDamage(damage);
             }
             Destroy(gameObject);
         }

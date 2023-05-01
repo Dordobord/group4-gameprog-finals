@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: KnightLvl2
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  sprite: {fileID: 21300000, guid: 5d52b20f865aff242bfcb08c3b6f61a5, type: 3}
+  sprite: {fileID: -142167414, guid: ba55ac8a287030f41b83b62ba3782a20, type: 3}
   speed: 2
   Health: 100
   AtkDmg: 20
+  AtkRange: 0
   Range: 3

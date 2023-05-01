@@ -5,13 +5,12 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PowerUp : MonoBehaviour
 {
-    [SerializeField] private PowerUpScript buffEffect;
+    [SerializeField] public PowerUpScript buffEffect;
     public List<PowerUpScript> PowerUPs = new List<PowerUpScript>();
     private SpriteRenderer rend;
 
     private void Start()
     {
-
         float dropRoll = UnityEngine.Random.Range(0f, 1f);
         float cumulativeDropChance = 0f;
         Shuffle(PowerUPs);
@@ -31,7 +30,6 @@ public class PowerUp : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector2.Lerp(transform.position, new Vector2(Random.value, Random.value), Time.deltaTime / 2);
         if (transform.position.y < Boundary.UPboundary.y * -1)
         {
             Destroy(this.gameObject);

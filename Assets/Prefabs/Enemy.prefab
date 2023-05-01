@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8753151938243645452}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,11 +123,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyName: 
   HP: 0
+  damage: 0
   loot: {fileID: 5900012364479495063, guid: b9c75bfc5ca73a345a44596428897d2d, type: 3}
   EnemyList:
   - {fileID: 11400000, guid: 35ef568a612ddfa4ba9ca4ad17b7606e, type: 2}
   - {fileID: 11400000, guid: e337d8cf89baedc449bdfd7ede56277c, type: 2}
-  n: 0
   rend: {fileID: 0}
   currState: 0
 --- !u!61 &8753151938243645452
@@ -140,7 +140,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.018784642, y: 0.10604988}
@@ -166,6 +166,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8555510467984896181}
   - component: {fileID: 8555510467984896180}
+  - component: {fileID: 7444744032219448962}
   m_Layer: 0
   m_Name: SwordHitBox
   m_TagString: Untagged
@@ -214,3 +215,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.6953714, y: 0.9554234}
   m_EdgeRadius: 0
+--- !u!114 &7444744032219448962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8555510467984896170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db71e6a9d327c741ada9356456a7bf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
