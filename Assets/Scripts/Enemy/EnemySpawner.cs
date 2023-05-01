@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
             Debug.Log("Enemy Spawned.");
             n++;
             Instantiate(Enemy, spawnArea, Quaternion.identity);
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(2);
             canSpawn = true;
         }
         Debug.Log("Enemy Spawned.");

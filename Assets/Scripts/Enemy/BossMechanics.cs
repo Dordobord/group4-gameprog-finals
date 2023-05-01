@@ -14,7 +14,7 @@ public class BossMechanics : MonoBehaviour
         private Vector3 respawnPoint;
         int n, bumpDmg = 10;
         Vector3 currPos;
-        float MRange = 1, ARange = 10;
+        float MRange = 1, ARange = 10, angle;
         public bool canShoot, canAtk, canAoe;
         // Start is called before the first frame update
         public enum EnemyState
@@ -59,7 +59,10 @@ public class BossMechanics : MonoBehaviour
 
             if (HP <= 50)
                 StartCoroutine(AoE());
-        }
+        //Get angle to player
+        Vector2 direction = Vector3.right - transform.position;
+        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    }
         private bool IsPlayerInRange(float range)
         {
             return Vector3.Distance(transform.position, target.transform.position) <= range;
@@ -109,7 +112,7 @@ public class BossMechanics : MonoBehaviour
         IEnumerator Shoot()
         {
                 canShoot = false;
-                Instantiate(Bullet, BulletSpawnSpot.position, Quaternion.identity);
+                Instantiate(Bullet, BulletSpawnSpot.position, Quaternion.Euler(new Vector3(0, 0, angle)));
                 Bullet.transform.position = Vector2.MoveTowards(BulletSpawnSpot.position, target.transform.position, speed * Time.deltaTime);
                 yield return new WaitForSeconds(6);
                 canShoot = true;

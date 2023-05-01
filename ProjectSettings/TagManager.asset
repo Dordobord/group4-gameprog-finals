@@ -10,6 +10,8 @@ TagManager:
   - EnemySword
   - EnemyBullet
   - Boss
+  - Bsword
+  - Baoe
   layers:
   - Default
   - TransparentFX

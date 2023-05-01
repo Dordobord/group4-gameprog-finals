@@ -21,7 +21,7 @@ public class EnemyMechanics : MonoBehaviour
     public SpriteRenderer rend;
     Vector3 currPos;
     bool canShoot;
-    float speed = 5;
+    float speed = 5, angle;
     // Start is called before the first frame update
     public enum EnemyState
     {
@@ -64,6 +64,10 @@ public class EnemyMechanics : MonoBehaviour
             currState = EnemyState.Wander;
         else if (IsPlayerInRange(Enemy.Range) && IsPlayerInRange(Enemy.AtkRange))
             currState = EnemyState.Attack;
+
+        //Get angle to player
+        Vector2 direction = transform.position - Vector3.right;  
+        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
     }
     private bool IsPlayerInRange(float range)
     {
@@ -145,8 +149,7 @@ public class EnemyMechanics : MonoBehaviour
     IEnumerator Shoot()
     {
         canShoot = false;
-        Instantiate(Bullet, BulletSpawn.position, Quaternion.identity);
-        Bullet.transform.position = Vector2.MoveTowards(BulletSpawn.position, Enemy.target.transform.position, speed * Time.deltaTime);
+        Instantiate(Bullet, BulletSpawn.position, Quaternion.Euler(new Vector3(0, 0, angle)));
         yield return new WaitForSeconds(6);
         canShoot = true;
     }
