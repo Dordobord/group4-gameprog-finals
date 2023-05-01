@@ -5,14 +5,16 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class KnightSword : MonoBehaviour
 {
+    EnemyMechanics enemy;
     public void OnTriggerEnter2D(Collider2D hit)
     {
+        enemy = GetComponentInParent<EnemyMechanics>();
 
         if (hit.gameObject.tag == "Player" || hit.gameObject.tag == "PlayerBullet")
         {
-            if (hit.gameObject.tag == "Enemy")
+            if (hit.gameObject.tag == "Player")
             {
-                Debug.Log("Attacked");
+                hit.gameObject.GetComponent<PlayerMech>().TakeDamage(enemy.damage);
             }
             Destroy(gameObject);
         }

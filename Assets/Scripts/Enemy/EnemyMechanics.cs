@@ -8,13 +8,15 @@ public class EnemyMechanics : MonoBehaviour
     public string EnemyName; 
     public float HP;
     public int damage;
+    public GameObject Bullet;
+    public Transform BulletSpawn;
     public GameObject loot;
     private int score;
     public List<EnemyScript> EnemyList;
     EnemyScript Enemy;
     private bool chooseDir = false;
     private Vector3 randomDir;
-    int n;
+    int n, bumpDmg = 5;
     public SpriteRenderer rend;
     Vector3 currPos;
     // Start is called before the first frame update
@@ -53,7 +55,7 @@ public class EnemyMechanics : MonoBehaviour
                 Attack();
                 break;
         }
-        if (IsPlayerInRange(Enemy.Range))
+        if (IsPlayerInRange(Enemy.Range) && !IsPlayerInRange(Enemy.AtkRange))
             currState = EnemyState.Follow;
         else if (!IsPlayerInRange(Enemy.Range))
             currState = EnemyState.Wander;
@@ -90,18 +92,29 @@ public class EnemyMechanics : MonoBehaviour
     void Follow()
     {
         transform.position = Vector2.MoveTowards(transform.position, Enemy.target.transform.position, Enemy.speed * Time.deltaTime);
+        if (IsPlayerInRange(Enemy.AtkRange))
+
+        {
+            currState = EnemyState.Attack;
+        }
     }
 
     void Attack()
     {
         if (Enemy.name == "KnightLvl1")
         {
-            GetComponentInChildren<BoxCollider2D>().enabled = true;
+            StartCoroutine(Melee());
         }
-        if (Enemy.name == "SpearmenLvl1")
+        else if (Enemy.name == "SpearmenLvl1")
         {
-            Debug.Log("Shoot");
+            Instantiate(Bullet, BulletSpawn.position, Quaternion.identity);
         }
+        else if (!IsPlayerInRange(Enemy.AtkRange) && IsPlayerInRange(Enemy.Range))
+        {
+            currState = EnemyState.Follow;
+        }
+        else if (!IsPlayerInRange(Enemy.AtkRange) && !IsPlayerInRange(Enemy.Range))
+            currState = EnemyState.Wander;
     }
     public void TakeDamage(float damage)
     {
@@ -125,5 +138,20 @@ public class EnemyMechanics : MonoBehaviour
         }
 
         Destroy(this.gameObject);
+    }
+    IEnumerator Melee()
+    {
+        GetComponentInChildren<BoxCollider2D>().enabled = true;
+        yield return new WaitForSeconds(1);
+        GetComponentInChildren<BoxCollider2D>().enabled = false;
+        yield return new WaitForSeconds(2);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<PlayerMech>().TakeDamage(bumpDmg);
+        }
     }
 }

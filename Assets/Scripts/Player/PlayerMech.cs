@@ -26,7 +26,7 @@ public class PlayerMech : MonoBehaviour
         canShoot = true;
         canDash= true;
         manabar = Bar.GetComponent<Manabar>();
-        hasKey= false;
+        hasKey = false;
     }
 
     // Update is called once per frame
@@ -78,6 +78,11 @@ public class PlayerMech : MonoBehaviour
         }
         else
             Debug.Log("Insufficient Mana");
+
+        if (hasKey)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     IEnumerator Dash(float CD)

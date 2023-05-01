@@ -7,7 +7,7 @@ public class PlayerBullet : MonoBehaviour
 {
 
     [SerializeField] public float speed = 60f;
-    public float damage = 20;
+    public float damage = 15;
     public Rigidbody2D rb;
 
     // Start is called before the first frame update
