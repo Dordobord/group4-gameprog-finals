@@ -6,8 +6,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class BossMechanics : MonoBehaviour
 {
-    public class EnemyMechanics : MonoBehaviour
-    {
         public float HP = 750;
         public int MeleeDmg = 35, AxeDmg = 30;
         public float speed = 4;
@@ -135,5 +133,4 @@ public class BossMechanics : MonoBehaviour
                 collision.gameObject.GetComponent<PlayerMech>().TakeDamage(bumpDmg);
             }
         }
-    }
 }
