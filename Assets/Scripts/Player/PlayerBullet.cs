@@ -13,8 +13,12 @@ public class PlayerBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Vector2 dir = TopDownController.BulletDir;
-        rb.velocity = dir * speed;
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = transform.position.z - Camera.main.transform.position.z;
+        Vector3 targetPos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector2 direction = (targetPos - transform.position).normalized;
+
+        rb.velocity = direction * speed;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 
@@ -32,7 +36,7 @@ public class PlayerBullet : MonoBehaviour
     public void OnTriggerEnter2D (Collider2D hit)
     {
 
-        if (hit.gameObject.tag == "Enemy" || hit.gameObject.tag == "EnemyBullet")
+        if (hit.gameObject.tag == "Enemy" || hit.gameObject.tag == "EnemyBullet" || hit.gameObject.tag == "Boss")
         {
             if (hit.gameObject.tag == "Enemy")
             {
@@ -40,6 +44,12 @@ public class PlayerBullet : MonoBehaviour
 
                 enemy.TakeDamage(damage);
             }
+            else if (hit.gameObject.tag == "Boss")
+            {
+                BossMechanics boss = hit.gameObject.GetComponent<BossMechanics>();
+                boss.TakeDamage(damage);
+            }
+
             Destroy(gameObject);
         }
     }

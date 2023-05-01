@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     
-    public static int maxHealth;
-    public static int currentHealth;
+    public int maxHealth;
+    public int currentHealth;
     public Healthbar healthBar;
 
     void Start()

@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyMechanics : MonoBehaviour
 {
     public string EnemyName; 
     public float HP;
     public int damage;
-    public GameObject Bullet;
+    public GameObject Bullet, sword;
     public Transform BulletSpawn;
     public GameObject loot;
     private int score;
@@ -19,6 +20,8 @@ public class EnemyMechanics : MonoBehaviour
     int n, bumpDmg = 5;
     public SpriteRenderer rend;
     Vector3 currPos;
+    bool canShoot;
+    float speed = 5;
     // Start is called before the first frame update
     public enum EnemyState
     {
@@ -107,7 +110,7 @@ public class EnemyMechanics : MonoBehaviour
         }
         else if (Enemy.name == "SpearmenLvl1")
         {
-            Instantiate(Bullet, BulletSpawn.position, Quaternion.identity);
+            StartCoroutine(Shoot());
         }
         else if (!IsPlayerInRange(Enemy.AtkRange) && IsPlayerInRange(Enemy.Range))
         {
@@ -139,11 +142,19 @@ public class EnemyMechanics : MonoBehaviour
 
         Destroy(this.gameObject);
     }
+    IEnumerator Shoot()
+    {
+        canShoot = false;
+        Instantiate(Bullet, BulletSpawn.position, Quaternion.identity);
+        Bullet.transform.position = Vector2.MoveTowards(BulletSpawn.position, Enemy.target.transform.position, speed * Time.deltaTime);
+        yield return new WaitForSeconds(6);
+        canShoot = true;
+    }
     IEnumerator Melee()
     {
-        GetComponentInChildren<BoxCollider2D>().enabled = true;
+        sword.SetActive(true);
         yield return new WaitForSeconds(1);
-        GetComponentInChildren<BoxCollider2D>().enabled = false;
+        sword.SetActive(false);
         yield return new WaitForSeconds(2);
     }
 

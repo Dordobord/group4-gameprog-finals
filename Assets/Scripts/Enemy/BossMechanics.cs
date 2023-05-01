@@ -8,14 +8,14 @@ public class BossMechanics : MonoBehaviour
 {
         public float HP = 750;
         public int MeleeDmg = 35, AxeDmg = 30;
-        public float speed = 4;
-        public GameObject Bullet, target;
+        public float speed = 2;
+        public GameObject Bullet, target, sRange, aRange;
         public Transform BulletSpawnSpot;
         private Vector3 respawnPoint;
         int n, bumpDmg = 10;
         Vector3 currPos;
-        float MRange, ARange;
-        bool canShoot = true;
+        float MRange = 1, ARange = 10;
+        public bool canShoot, canAtk, canAoe;
         // Start is called before the first frame update
         public enum EnemyState
         {
@@ -26,8 +26,11 @@ public class BossMechanics : MonoBehaviour
         public EnemyState currState;
         void Start()
         {
+            canShoot = true; canAtk = true; canAoe = true;
             target = GameObject.FindGameObjectWithTag("Player");
             respawnPoint = transform.position;
+            aRange.SetActive(false);
+            sRange.SetActive(false);
 
         }
 
@@ -72,10 +75,11 @@ public class BossMechanics : MonoBehaviour
         }
 
         void Follow()
-        {
-            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
-            if (IsPlayerInRange(MRange) && canShoot)
-                StartCoroutine(Shoot());
+        {   if(canShoot)
+            StartCoroutine(Shoot());
+            else if (IsPlayerInRange(ARange) && !canShoot)
+                transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            else if (IsPlayerInRange(MRange) && IsPlayerInRange(ARange))
             {
                 currState = EnemyState.Attack;
             }
@@ -83,7 +87,15 @@ public class BossMechanics : MonoBehaviour
 
         void Attack()
         {
-                StartCoroutine(Melee());
+            StartCoroutine(Melee());
+            if (!IsPlayerInRange(MRange) && IsPlayerInRange(ARange))
+            {
+                currState = EnemyState.Follow;
+            }
+            else if (!IsPlayerInRange(MRange) && !IsPlayerInRange(ARange))
+            {
+                currState = EnemyState.Return;
+            }
         }
         public void TakeDamage(float damage)
         {
@@ -98,15 +110,21 @@ public class BossMechanics : MonoBehaviour
         {
                 canShoot = false;
                 Instantiate(Bullet, BulletSpawnSpot.position, Quaternion.identity);
+                Bullet.transform.position = Vector2.MoveTowards(BulletSpawnSpot.position, target.transform.position, speed * Time.deltaTime);
                 yield return new WaitForSeconds(6);
                 canShoot = true;
         }
         IEnumerator AoE()
         {
-            GetComponentInChildren<BoxCollider2D>().enabled = true;
-            yield return new WaitForSeconds(1);
-            GetComponentInChildren<BoxCollider2D>().enabled = false;
-            yield return new WaitForSeconds(10);
+            if (canAoe)
+            {
+                canAoe= false;
+                aRange.SetActive(true);
+                yield return new WaitForSeconds(1);
+                aRange.SetActive(false);
+                yield return new WaitForSeconds(10);
+                canAoe= true;
+            }
         }
         public void Die()
         {
@@ -120,11 +138,21 @@ public class BossMechanics : MonoBehaviour
         }
         IEnumerator Melee()
         {
-            GetComponentInChildren<BoxCollider2D>().enabled = true;
-            yield return new WaitForSeconds(1);
-            GetComponentInChildren<BoxCollider2D>().enabled = false;
-            yield return new WaitForSeconds(2);
+        if (IsPlayerInRange(MRange) && canShoot)
+            StartCoroutine(Shoot());
+        {
+            currState = EnemyState.Attack;
         }
+        if (canAtk)
+        {
+            canAtk = false;
+            sRange.SetActive(true);
+            yield return new WaitForSeconds(1);
+            sRange.SetActive(false);
+            yield return new WaitForSeconds(2);
+            canAtk = true;
+        }
+    }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {

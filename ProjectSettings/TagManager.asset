@@ -9,6 +9,7 @@ TagManager:
   - Bar
   - EnemySword
   - EnemyBullet
+  - Boss
   layers:
   - Default
   - TransparentFX

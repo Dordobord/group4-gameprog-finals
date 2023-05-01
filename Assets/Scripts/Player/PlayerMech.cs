@@ -13,7 +13,7 @@ public class PlayerMech : MonoBehaviour
     [SerializeField] public GameObject Bullet;
     [SerializeField] public Transform BulletSpawnSpot;
 
-    PlayerHealth PlayerHealth;
+    PlayerHealth PHealth;
     float dashPower = 20, dashTime = 2, dashCost = 20;
     float shootCD = 0.5f, shootCost = 5;
     public bool canShoot, canDash, hasKey;
@@ -23,6 +23,7 @@ public class PlayerMech : MonoBehaviour
     public short BulletSizeBuff=0, DamageBuff=0, MaxHpBuff=0, MaxManaBuff=0;
     void Start()
     {
+        PHealth = GetComponent<PlayerHealth>();
         canShoot = true;
         canDash= true;
         manabar = Bar.GetComponent<Manabar>();
@@ -102,16 +103,11 @@ public class PlayerMech : MonoBehaviour
         else
             Debug.Log("Insufficient Mana");
     }
-
-
     public void TakeDamage(int damage)
     {
-        PlayerHealth.currentHealth -= damage;
-        Debug.Log("Player Hit! HP = " + PlayerHealth.currentHealth);
-        PlayerPrefs.SetFloat("PlayerHP", PlayerHealth.currentHealth);
-        PlayerPrefs.Save();
+        PHealth.currentHealth -= damage;
 
-        if (PlayerHealth.currentHealth == 0)
+        if (PHealth.currentHealth == 0)
             Die();
     }
 
