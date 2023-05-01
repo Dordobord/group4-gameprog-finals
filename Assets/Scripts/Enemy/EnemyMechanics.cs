@@ -40,6 +40,7 @@ public class EnemyMechanics : MonoBehaviour
         HP = Enemy.Health;
         rend.sprite = Enemy.sprite;
         damage = Enemy.AtkDmg;
+        canShoot = true;
     }
 
     // Update is called once per frame
@@ -108,11 +109,11 @@ public class EnemyMechanics : MonoBehaviour
 
     void Attack()
     {
-        if (Enemy.name == "KnightLvl1")
+        if (Enemy.name == "KnightLvl1" || Enemy.name == "KnightLvl2")
         {
             StartCoroutine(Melee());
         }
-        else if (Enemy.name == "SpearmenLvl1")
+        else if (Enemy.name == "SpearmenLvl1" || Enemy.name == "SpearmenLvl2")
         {
             StartCoroutine(Shoot());
         }
@@ -150,7 +151,7 @@ public class EnemyMechanics : MonoBehaviour
     {
         canShoot = false;
         Instantiate(Bullet, BulletSpawn.position, Quaternion.Euler(new Vector3(0, 0, angle)));
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(3);
         canShoot = true;
     }
     IEnumerator Melee()
@@ -165,7 +166,7 @@ public class EnemyMechanics : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerMech>().TakeDamage(bumpDmg);
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(bumpDmg);
         }
     }
 }

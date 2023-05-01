@@ -103,19 +103,4 @@ public class PlayerMech : MonoBehaviour
         else
             Debug.Log("Insufficient Mana");
     }
-    public void TakeDamage(int damage)
-    {
-        PHealth.currentHealth -= damage;
-
-        if (PHealth.currentHealth == 0)
-            Die();
-    }
-
-    void Die()
-    {
-        Debug.Log("You have Died. T^T");
-        Debug.Log("Level Restart.");
-        Scene CurrentLvl = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(CurrentLvl.name);
-    }
 }

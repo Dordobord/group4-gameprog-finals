@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyBullet : MonoBehaviour
 {
     [SerializeField] public float speed = 10f;
     Rigidbody2D Rb;
-    private int damage = 20;
+    private int damage, n;
     private void Start()
     {
         Rb = GetComponent<Rigidbody2D>();
         Rb.velocity = transform.right * speed;
+        n = SceneManager.GetActiveScene().buildIndex;
     }
     void Update()
     {
@@ -19,6 +21,12 @@ public class EnemyBullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (n == 1)
+            damage = 10;
+        else if (n == 2)
+            damage = 15;
+        else if (n == 3)
+            damage = 30;
     }
 
     public void OnTriggerEnter2D(Collider2D hit)
@@ -28,7 +36,7 @@ public class EnemyBullet : MonoBehaviour
         {
             if (hit.gameObject.tag == "Player")
             {
-                PlayerMech player = hit.gameObject.GetComponent<PlayerMech>();
+                PlayerHealth player = hit.gameObject.GetComponent<PlayerHealth>();
 
                 player.TakeDamage(damage);
 

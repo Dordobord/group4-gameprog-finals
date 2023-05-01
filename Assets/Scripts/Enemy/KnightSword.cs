@@ -14,7 +14,7 @@ public class KnightSword : MonoBehaviour
         {
             if (hit.gameObject.tag == "Player")
             {
-                hit.gameObject.GetComponent<PlayerMech>().TakeDamage(enemy.damage);
+                hit.gameObject.GetComponent<PlayerHealth>().TakeDamage(enemy.damage);
             }
             Destroy(gameObject);
         }

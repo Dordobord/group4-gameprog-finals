@@ -15,7 +15,7 @@ public class BossSkill : MonoBehaviour
             {
                 if (hit.gameObject.tag == "Player")
                 {
-                    hit.gameObject.GetComponent<PlayerMech>().TakeDamage(boss.MeleeDmg);
+                    hit.gameObject.GetComponent<PlayerHealth>().TakeDamage(boss.MeleeDmg);
                 }
                 Destroy(gameObject);
             }
@@ -26,7 +26,7 @@ public class BossSkill : MonoBehaviour
             {
                 if (hit.gameObject.tag == "Player")
                 {
-                    hit.gameObject.GetComponent<PlayerMech>().TakeDamage(boss.AxeDmg);
+                    hit.gameObject.GetComponent<PlayerHealth>().TakeDamage(boss.AxeDmg);
                 }
                 Destroy(gameObject);
             }
