@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 795293878184029910}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 795293878978238371}
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  damage: 25
+  damage: 15
   rb: {fileID: 1205882004768442272}
 --- !u!50 &1205882004768442272
 Rigidbody2D:
